@@ -13,6 +13,9 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id)
     else
+      # @booksを入れないと変異後に＠booksにデータがない状態になるから
+      # undefined method `each' for nil:NilClassのエラーが出る
+      @books = Book.all
       render :index
     end
   end
